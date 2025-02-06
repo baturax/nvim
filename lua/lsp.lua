@@ -71,6 +71,10 @@ cmp.setup({
 
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+  require'lspconfig'.v_analyzer.setup{
+     capabilities = capabilities
+  }
+
    require'lspconfig'.cssls.setup{
      capabilities = capabilities
    }

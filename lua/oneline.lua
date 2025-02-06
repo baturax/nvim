@@ -1,10 +1,14 @@
 --snowww
 require("let-it-snow").setup()
 
+--mason
+require("mason").setup()
+
 --hex
-require 'hex'.setup()
+require("hex").setup()
 
 --lualine
+require("lualine").setup()
 
 --noice
 
@@ -12,10 +16,10 @@ require 'hex'.setup()
 require("notify").setup()
 
 --markdown
-require('render-markdown').setup()
+require("render-markdown").setup()
 
 --pairs
-require('nvim-autopairs').setup({
+require("nvim-autopairs").setup({
   disable_filetype = { "TelescopePrompt" , "vim" },
 })
 
