@@ -7,7 +7,7 @@ vim.lsp.enable("rust")
 vim.lsp.enable("meson")
 
 require("blink.cmp").setup({
-   keymap = { preset = "enter" },
+   keymap = { preset = "super-tab" },
 
    appearance = {
       nerd_font_variant = "nerd"
