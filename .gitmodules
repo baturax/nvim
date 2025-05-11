@@ -1,0 +1,87 @@
+[submodule "pack/colorschemes/start/vim"]
+	path = pack/colorschemes/start/vim
+	url = https://github.com/mountain-theme/vim
+[submodule "pack/bloat/start/friendly-snippets"]
+	path = pack/bloat/start/friendly-snippets
+	url = https://github.com/rafamadriz/friendly-snippets
+[submodule "pack/bloat/start/nvim-lspconfig"]
+	path = pack/bloat/start/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig
+[submodule "pack/bloat/start/nvim-treesitter"]
+	path = pack/bloat/start/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter
+[submodule "pack/bloat/start/nvim-treesitter-context"]
+	path = pack/bloat/start/nvim-treesitter-context
+	url = https://github.com/nvim-treesitter/nvim-treesitter-context
+[submodule "pack/bloat/start/nvim-web-devicons"]
+	path = pack/bloat/start/nvim-web-devicons
+	url = https://github.com/nvim-tree/nvim-web-devicons
+[submodule "pack/bloat/start/nvim-window-picker"]
+	path = pack/bloat/start/nvim-window-picker
+	url = https://github.com/s1n7ax/nvim-window-picker
+[submodule "pack/bloat/start/vim-illuminate"]
+	path = pack/bloat/start/vim-illuminate
+	url = https://github.com/RRethy/vim-illuminate
+[submodule "pack/bloat/start/vim-lastplace"]
+	path = pack/bloat/start/vim-lastplace
+	url = https://github.com/farmergreg/vim-lastplace
+[submodule "pack/bloat/start/blink.cmp"]
+	path = pack/bloat/start/blink.cmp
+	url = https://github.com/Saghen/blink.cmp
+[submodule "pack/bloat/start/mini.icons"]
+	path = pack/bloat/start/mini.icons
+	url = https://github.com/echasnovski/mini.icons
+[submodule "pack/bloat/start/actually.nvim"]
+	path = pack/bloat/start/actually.nvim
+	url = https://github.com/mong8se/actually.nvim
+[submodule "pack/bloat/start/barbar.nvim"]
+	path = pack/bloat/start/barbar.nvim
+	url = https://github.com/romgrk/barbar.nvim
+[submodule "pack/bloat/start/dressing.nvim"]
+	path = pack/bloat/start/dressing.nvim
+	url = https://github.com/stevearc/dressing.nvim
+[submodule "pack/bloat/start/gitsigns.nvim"]
+	path = pack/bloat/start/gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim
+[submodule "pack/bloat/start/image.nvim"]
+	path = pack/bloat/start/image.nvim
+	url = https://github.com/3rd/image.nvim
+[submodule "pack/bloat/start/lazygit.nvim"]
+	path = pack/bloat/start/lazygit.nvim
+	url = https://github.com/kdheepak/lazygit.nvim
+[submodule "pack/bloat/start/mason.nvim"]
+	path = pack/bloat/start/mason.nvim
+	url = https://github.com/mason-org/mason.nvim
+[submodule "pack/bloat/start/neo-tree.nvim"]
+	path = pack/bloat/start/neo-tree.nvim
+	url = https://github.com/nvim-neo-tree/neo-tree.nvim
+[submodule "pack/bloat/start/nerdy.nvim"]
+	path = pack/bloat/start/nerdy.nvim
+	url = https://github.com/2KAbhishek/nerdy.nvim
+[submodule "pack/bloat/start/nui.nvim"]
+	path = pack/bloat/start/nui.nvim
+	url = https://github.com/MunifTanjim/nui.nvim
+[submodule "pack/bloat/start/plenary.nvim"]
+	path = pack/bloat/start/plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim
+[submodule "pack/bloat/start/rainbow-delimiters.nvim"]
+	path = pack/bloat/start/rainbow-delimiters.nvim
+	url = https://github.com/HiPhish/rainbow-delimiters.nvim
+[submodule "pack/bloat/start/telescope-file-browser.nvim"]
+	path = pack/bloat/start/telescope-file-browser.nvim
+	url = https://github.com/nvim-telescope/telescope-file-browser.nvim
+[submodule "pack/bloat/start/telescope.nvim"]
+	path = pack/bloat/start/telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim
+[submodule "pack/bloat/start/twilight.nvim"]
+	path = pack/bloat/start/twilight.nvim
+	url = https://github.com/folke/twilight.nvim
+[submodule "pack/bloat/start/ultimate-autopair.nvim"]
+	path = pack/bloat/start/ultimate-autopair.nvim
+	url = https://github.com/altermo/ultimate-autopair.nvim
+[submodule "pack/bloat/start/which-key.nvim"]
+	path = pack/bloat/start/which-key.nvim
+	url = https://github.com/folke/which-key.nvim
+[submodule "pack/bloat/start/zen-mode.nvim"]
+	path = pack/bloat/start/zen-mode.nvim
+	url = https://github.com/folke/zen-mode.nvim
