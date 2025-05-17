@@ -85,3 +85,6 @@
 [submodule "pack/bloat/start/zen-mode.nvim"]
 	path = pack/bloat/start/zen-mode.nvim
 	url = https://github.com/folke/zen-mode.nvim
+[submodule "pack/bloat/start/HexEditor.nvim"]
+	path = pack/bloat/start/HexEditor.nvim
+	url = https://github.com/ArcaneSpecs/HexEditor.nvim

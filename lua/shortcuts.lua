@@ -13,5 +13,11 @@ vim.keymap.set("n", "<a-s-e>", ":Telescope file_browser<CR>")
 
 vim.keymap.set('n', '<a-Right>', '<C-w>l')
 vim.keymap.set('n', '<a-Left>', '<C-w>h')
-vim.keymap.set("n", "<A-Down>", "<C-e>", { noremap = true, silent = true })
-vim.keymap.set("n", "<A-Up>", "<C-y>", { noremap = true, silent = true })
+vim.keymap.set('n', '<a-Up>', '<C-w>k')
+vim.keymap.set('n', '<a-Down>', '<C-w>j')
+
+vim.keymap.set("n", "<C-Down>", "<C-e>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-Up>", "<C-y>", { noremap = true, silent = true })
+
+vim.keymap.set('n', '<A-CR>', vim.diagnostic.open_float, { desc = "Show diagnostics" })
+

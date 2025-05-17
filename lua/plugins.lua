@@ -39,3 +39,5 @@ require("telescope").setup({
    }
 })
 
+-- Hex
+require("HexEditor").setup()

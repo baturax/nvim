@@ -4,7 +4,6 @@ vim.lsp.enable("clangd")
 vim.lsp.enable("bashls")
 vim.lsp.enable("fish_lsp")
 vim.lsp.enable("rust")
-vim.lsp.enable("meson")
 
 require("blink.cmp").setup({
    keymap = { preset = "super-tab" },
