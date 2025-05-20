@@ -41,3 +41,9 @@ require("telescope").setup({
 
 -- Hex
 require("HexEditor").setup()
+
+-- Smear
+require("smear_cursor").setup({})
+
+-- Color
+require("nvim-highlight-colors").setup({})

@@ -3,7 +3,8 @@ vim.lsp.enable("vala_ls")
 vim.lsp.enable("clangd")
 vim.lsp.enable("bashls")
 vim.lsp.enable("fish_lsp")
-vim.lsp.enable("rust")
+vim.lsp.enable("cssls")
+vim.lsp.enable("rust-analyzer")
 
 require("blink.cmp").setup({
    keymap = { preset = "super-tab" },
