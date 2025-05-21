@@ -88,9 +88,6 @@
 [submodule "pack/bloat/start/HexEditor.nvim"]
 	path = pack/bloat/start/HexEditor.nvim
 	url = https://github.com/ArcaneSpecs/HexEditor.nvim
-[submodule "pack/bloat/start/smear-cursor.nvim"]
-	path = pack/bloat/start/smear-cursor.nvim
-	url = https://github.com/sphamba/smear-cursor.nvim
 [submodule "pack/bloat/start/nvim-highlight-colors"]
 	path = pack/bloat/start/nvim-highlight-colors
 	url = https://github.com/brenoprata10/nvim-highlight-colors
