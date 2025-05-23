@@ -44,3 +44,14 @@ require("HexEditor").setup()
 
 -- Color
 require("nvim-highlight-colors").setup({})
+
+-- Habit
+require("hardtime").setup({
+   disabled_keys = {
+      ["<Up>"] = false,
+      ["<Down>"] = false,
+      ["<Left>"] = false,
+      ["<Right>"] = false,
+   },
+   disable_mouse = false,
+})

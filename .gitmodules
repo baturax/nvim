@@ -94,3 +94,6 @@
 [submodule "pack/bloat/start/rustaceanvim"]
 	path = pack/bloat/start/rustaceanvim
 	url = https://github.com/mrcjkb/rustaceanvim
+[submodule "pack/bloat/start/hardtime.nvim"]
+	path = pack/bloat/start/hardtime.nvim
+	url = https://github.com/m4xshen/hardtime.nvim
