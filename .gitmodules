@@ -97,3 +97,6 @@
 [submodule "pack/bloat/start/hardtime.nvim"]
 	path = pack/bloat/start/hardtime.nvim
 	url = https://github.com/m4xshen/hardtime.nvim
+[submodule "pack/bloat/start/vala.vim"]
+	path = pack/bloat/start/vala.vim
+	url = https://github.com/vala-lang/vala.vim
