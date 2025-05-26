@@ -5,6 +5,7 @@ vim.lsp.enable("bashls")
 vim.lsp.enable("fish_lsp")
 vim.lsp.enable("cssls")
 vim.lsp.enable("rust-analyzer")
+vim.lsp.enable("ts=typescript")
 
 require("blink.cmp").setup({
    keymap = { preset = "super-tab" },
