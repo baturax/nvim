@@ -1,5 +1,0 @@
-require("settings")
-require("plugins")
-require("shortcuts")
-require("cmp")
-vim.cmd('highlight Normal ctermbg=none ctermfg=none guifg=none guibg=none')
