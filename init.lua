@@ -2,15 +2,34 @@ local v = vim
 local o = v.opt
 local g = v.g
 local wo = vim.wo
-local api = vim.api
-local cmd = vim.cmd
-local key = vim.keymap.set
+local api = v.api
+local cmd = v.cmd
+local key = v.keymap.set
 local pack = v.pack
-local gh="https://github.com/"
+local gh = "https://github.com/"
+local lsp = vim.lsp
 
 pack.add({
-  { src = gh.."nvim-treesitter/nvim-treesitter",  }
+  { src = gh.."nvim-treesitter/nvim-treesitter", branch="main" },
+  
 })
+
+-- Plugins
+--
+-- Lsp Config
+lsp.enable("gopls")
+
+-- tree-sitter
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "go", "gomod", "goctl", "gomod", "gosum", "lua" },
+  sync_install = true,
+  auto_install = true,
+  highlight = {
+    enabled = true,
+  }
+})
+
+require("nvim-treesitter.install").prefer_git = true
 
 -- Settings
 
@@ -32,6 +51,9 @@ v.loader.enable = true
 o.foldmethod = "expr"
 o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 wo.relativenumber = true
+
+g.
+
 g.mapleader = " "
 
 -- Functions
