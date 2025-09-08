@@ -15,9 +15,8 @@ pack.add({
 	{ src = gh .. "nvim-treesitter/nvim-treesitter", branch = "main" },
 	{ src = gh .. "akinsho/bufferline.nvim" },
 	{ src = gh .. "altermo/ultimate-autopair.nvim", branch = "v0.6" },
-  { src = gh .. "ThePrimeagen/vim-be-good" }
+	{ src = gh .. "ThePrimeagen/vim-be-good" },
 })
-
 
 local function on_attach(client, bufnr)
 	lsp.completion.enable(true, client.id, bufnr, {
@@ -147,4 +146,3 @@ api.nvim_create_autocmd({ "BufReadPost" }, {
 		api.nvim_exec('silent! normal! g`"zv', false)
 	end,
 })
-
