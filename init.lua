@@ -5,6 +5,12 @@ local wo = vim.wo
 local api = vim.api
 local cmd = vim.cmd
 local key = vim.keymap.set
+local pack = v.pack
+local gh="https://github.com/"
+
+pack.add({
+  { src = gh.."nvim-treesitter/nvim-treesitter",  }
+})
 
 -- Settings
 
@@ -12,7 +18,6 @@ o.scrolloff = 7
 o.inccommand = "split"
 o.incsearch = true
 o.cursorline = true
-o.foldmethod = "indent"
 o.undofile = true
 o.fillchars:append(',eob: ')
 o.expandtab = true
@@ -24,6 +29,8 @@ o.clipboard = "unnamedplus"
 
 v.loader.enable = true
 
+o.foldmethod = "expr"
+o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 wo.relativenumber = true
 g.mapleader = " "
 
