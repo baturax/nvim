@@ -11,11 +11,19 @@ local lsp = vim.lsp
 
 pack.add({
   { src = gh.."nvim-treesitter/nvim-treesitter", branch="main" },
-  
+  { src = gh.."akinsho/bufferline.nvim" },
+  { src = gh.."altermo/ultimate-autopair.nvim", branch='v0.6', }
 })
+
 
 -- Plugins
 --
+-- auto pair
+require('ultimate-autopair').setup()
+--
+-- buffer
+require("bufferline").setup{}
+
 -- Lsp Config
 lsp.enable("gopls")
 
@@ -33,7 +41,8 @@ require("nvim-treesitter.install").prefer_git = true
 
 -- Settings
 
-o.scrolloff = 7
+o.scrolloff = 10
+o.termguicolors = true
 o.inccommand = "split"
 o.incsearch = true
 o.cursorline = true
@@ -52,9 +61,19 @@ o.foldmethod = "expr"
 o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 wo.relativenumber = true
 
-g.
-
 g.mapleader = " "
+
+-- Shortcuts
+local i = "i"
+local n = "n"
+local v = "v"
+local t = "t"
+key({i,n}, '<A-1>', '<Cmd>:b 1<Cr>')
+key({i,n}, '<A-2>', '<Cmd>:b 2<Cr>')
+key({i,n}, '<A-3>', '<Cmd>:b 3<Cr>')
+key({i,n}, '<A-4>', '<Cmd>:b 4<Cr>')
+key({i,n}, '<A-5>', '<Cmd>:b 5<Cr>')
+key({i,n}, '<A-w>', '<Cmd>:bdel<Cr>')
 
 -- Functions
 --
