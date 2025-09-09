@@ -26,7 +26,14 @@ local function on_attach(client, bufnr)
 	})
 
 	key("i", "<C-space>", lsp.completion.get, { desc = "trigger autocompletion" })
-	api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
+  api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
+
+  api.nvim_create_autocmd("InsertCharPre", {
+    buffer = buffnr,
+    callback = function ()
+      lsp.completion.get()
+    end
+  })
 end
 
 local servers = { "gopls", "basedpyright", "lua_ls" }
