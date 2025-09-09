@@ -71,6 +71,7 @@ o.shiftwidth = 2
 o.tabstop = 2
 o.mouse = ""
 o.clipboard = "unnamedplus"
+o.showmode = false
 
 v.loader.enable = true
 
@@ -117,7 +118,7 @@ key("i", "<Up>", function()
 end, { expr = true, silent = true })
 
 key("n", "<leader>d", function()
-	diagnostic.open_float(0, { focusable = false }) -- sadece popup
+	diagnostic.open_float(0, { focusable = false })
 end)
 
 key("n", "<leader>ca", lsp.buf.code_action, { noremap = true, silent = true })
@@ -150,18 +151,28 @@ api.nvim_create_autocmd({ "BufReadPost" }, {
 	end,
 })
 
+-- buffer
+
+local function ShortMode()
+  local m = vim.fn.mode()
+  if m == "n" then return "N"
+  elseif m == "i" then return "I"
+  elseif m == "v" or m == "V" or m == "\22" then return "V"
+  elseif m == "R" then return "R"
+  elseif m == "c" then return ":"
+  elseif m == "t" then return "T" end
+  return m
+end
+
 local function buffers()
   local current_buf = vim.api.nvim_get_current_buf()
   local max_buf = vim.fn.bufnr("$")
   local bufline = ""
-
   for buf = 1, max_buf do
     if vim.fn.bufexists(buf) == 1 and vim.fn.buflisted(buf) == 1 then
       local name = vim.fn.bufname(buf)
       if name == "" then name = "[No Name]" end
-      if #name > 20 then
-        name = name:sub(1, 20) .. "…"
-      end
+      if #name > 20 then name = name:sub(1,20) .. "…" end
       if buf == current_buf then
         bufline = bufline .. ("[%d:%s] ") :format(buf, name)
       else
@@ -169,17 +180,34 @@ local function buffers()
       end
     end
   end
-
   return bufline
 end
 
-function MyStatusLine()
+
+function StatusLine()
   local bufline = buffers()
+  local mode = ShortMode()
   local filename = "%f %h%m%r"
   local pos = "%y %p%% %l:%c"
-  return bufline .. "%=" .. filename .. " " .. pos
+  local right
+
+  if mode == ":" then
+    right = ":" .. (vim.g.cmdline_status or "")
+  else
+    right = "[" .. mode .. "] " .. pos
+  end
+
+  return bufline .. "%=" .. filename .. " " .. right
 end
 
-vim.o.statusline = "%!v:lua.MyStatusLine()"
+vim.o.statusline = "%!v:lua.StatusLine()"
 vim.o.laststatus = 2
 
+o.cmdheight = 0
+g.cmdline_status = ""
+
+api.nvim_create_autocmd({"CmdlineEnter", "CmdlineLeave", "CmdlineChanged"}, {
+  callback = function()
+    vim.g.cmdline_status = vim.fn.getcmdline()
+  end
+})
