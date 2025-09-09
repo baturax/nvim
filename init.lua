@@ -13,9 +13,8 @@ local diagnostic = v.diagnostic
 
 pack.add({
 	{ src = gh .. "nvim-treesitter/nvim-treesitter", branch = "main" },
-	{ src = gh .. "akinsho/bufferline.nvim" },
 	{ src = gh .. "altermo/ultimate-autopair.nvim", branch = "v0.6" },
-	{ src = gh .. "ThePrimeagen/vim-be-good" },
+--	{ src = gh .. "ThePrimeagen/vim-be-good" },
 })
 
 local function on_attach(client, bufnr)
@@ -44,11 +43,6 @@ end
 -- auto pair
 require("ultimate-autopair").setup()
 --
--- buffer
-require("bufferline").setup({})
-
--- Lsp Config
-
 -- tree-sitter
 require("nvim-treesitter.configs").setup({
 	ensure_installed = { "go", "gomod", "goctl", "gomod", "gosum", "lua", "markdown" },
@@ -80,8 +74,8 @@ o.clipboard = "unnamedplus"
 
 v.loader.enable = true
 
-o.foldmethod = "expr"
-o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+--o.foldmethod = "expr"
+--o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 wo.relativenumber = true
 
 g.mapleader = " "
@@ -90,12 +84,21 @@ g.mapleader = " "
 
 local i = "i"
 local n = "n"
-key({ i, n }, "<A-1>", "<Cmd>:b 1<Cr>")
-key({ i, n }, "<A-2>", "<Cmd>:b 2<Cr>")
-key({ i, n }, "<A-3>", "<Cmd>:b 3<Cr>")
-key({ i, n }, "<A-4>", "<Cmd>:b 4<Cr>")
-key({ i, n }, "<A-5>", "<Cmd>:b 5<Cr>")
-key({ i, n }, "<A-w>", "<Cmd>:bdel<Cr>")
+local t = "t"
+key({ i, n, t }, "<A-1>", "<Cmd>:b 1<Cr>")
+key({ i, n, t }, "<A-2>", "<Cmd>:b 2<Cr>")
+key({ i, n, t }, "<A-3>", "<Cmd>:b 3<Cr>")
+key({ i, n, t }, "<A-4>", "<Cmd>:b 4<Cr>")
+key({ i, n, t }, "<A-5>", "<Cmd>:b 5<Cr>")
+key({ i, n, t }, "<A-w>", "<Cmd>:bdel<Cr>")
+
+key({i,n,t}, "<A-S-Left>", "<Cmd>:bnext<Cr>")
+key({i,n,t}, "<A-S-Right>", "<Cmd>:bright<Cr>")
+
+key({ "i", "n" }, "<A-Right>", "<cmd>wincmd l<cr>")
+key({ "i", "n" }, "<A-Left>", "<cmd>wincmd h<cr>")
+key({ "i", "n" }, "<A-Up>", "<cmd>wincmd k<cr>")
+key({ "i", "n" }, "<A-Down>", "<cmd>wincmd j<cr>")
 
 key("i", "<Tab>", function()
 	if fn.pumvisible() == 1 then
@@ -146,3 +149,37 @@ api.nvim_create_autocmd({ "BufReadPost" }, {
 		api.nvim_exec('silent! normal! g`"zv', false)
 	end,
 })
+
+local function buffers()
+  local current_buf = vim.api.nvim_get_current_buf()
+  local max_buf = vim.fn.bufnr("$")
+  local bufline = ""
+
+  for buf = 1, max_buf do
+    if vim.fn.bufexists(buf) == 1 and vim.fn.buflisted(buf) == 1 then
+      local name = vim.fn.bufname(buf)
+      if name == "" then name = "[No Name]" end
+      if #name > 20 then
+        name = name:sub(1, 20) .. "…"
+      end
+      if buf == current_buf then
+        bufline = bufline .. ("[%d:%s] ") :format(buf, name)
+      else
+        bufline = bufline .. ("%d:%s ") :format(buf, name)
+      end
+    end
+  end
+
+  return bufline
+end
+
+function MyStatusLine()
+  local bufline = buffers()
+  local filename = "%f %h%m%r"
+  local pos = "%y %p%% %l:%c"
+  return bufline .. "%=" .. filename .. " " .. pos
+end
+
+vim.o.statusline = "%!v:lua.MyStatusLine()"
+vim.o.laststatus = 2
+
