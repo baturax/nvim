@@ -2,9 +2,8 @@
 
 ### Plugins:
 * nvim-treesitter
-* bufferline
 * ultimate-autopair
-* vim-be-good
+
 
 ### some shortcuts:
 * A-{1-5} change buffer
