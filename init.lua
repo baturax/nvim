@@ -14,8 +14,6 @@ local bo = v.bo
 
 pack.add({
 	{ src = gh .. "nvim-treesitter/nvim-treesitter", branch = "main" },
-	{ src = gh .. "altermo/ultimate-autopair.nvim", branch = "v0.6" },
---	{ src = gh .. "ThePrimeagen/vim-be-good" },
 })
 
 local function on_attach(client, bufnr)
@@ -49,7 +47,6 @@ end
 -- Plugins
 --
 -- auto pair
-require("ultimate-autopair").setup()
 --
 -- tree-sitter
 require("nvim-treesitter.configs").setup({
@@ -78,6 +75,7 @@ o.softtabstop = 2
 o.shiftwidth = 2
 o.tabstop = 2
 o.mouse = ""
+o.showmatch = true
 o.clipboard = "unnamedplus"
 o.showmode = false
 
@@ -94,11 +92,8 @@ g.mapleader = " "
 local i = "i"
 local n = "n"
 local t = "t"
-key({ i, n, t }, "<A-1>", "<Cmd>:b 1<Cr>")
-key({ i, n, t }, "<A-2>", "<Cmd>:b 2<Cr>")
-key({ i, n, t }, "<A-3>", "<Cmd>:b 3<Cr>")
-key({ i, n, t }, "<A-4>", "<Cmd>:b 4<Cr>")
-key({ i, n, t }, "<A-5>", "<Cmd>:b 5<Cr>")
+key({ i, n, t }, "<A-1>", "<Cmd>:bnext<Cr>")
+key({ i, n, t }, "<A-2>", "<Cmd>:bprevious<Cr>")
 key({ i, n, t }, "<A-w>", "<Cmd>:bdel<Cr>")
 
 key({i,n,t}, "<A-S-Left>", "<Cmd>:bnext<Cr>")
