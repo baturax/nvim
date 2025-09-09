@@ -1,4 +1,3 @@
-
 ---@diagnostic disable: undefined-global
 local v = vim
 local o = v.opt
@@ -11,6 +10,7 @@ local gh = "https://github.com/"
 local lsp = v.lsp
 local fn = v.fn
 local diagnostic = v.diagnostic
+local bo = v.bo
 
 pack.add({
 	{ src = gh .. "nvim-treesitter/nvim-treesitter", branch = "main" },
@@ -79,7 +79,7 @@ o.shiftwidth = 2
 o.tabstop = 2
 o.mouse = ""
 o.clipboard = "unnamedplus"
-vim.o.showmode = false
+o.showmode = false
 
 v.loader.enable = true
 
@@ -161,12 +161,11 @@ api.nvim_create_autocmd({ "BufReadPost" }, {
 
 -- buffer
 --
--- init.lua içine ekle
 
-vim.opt.statusline = "%!v:lua.MyStatusline()"
+o.statusline = "%!v:lua.MyStatusline()"
 
 local function ShortMode()
-  local m = vim.fn.mode()
+  local m = fn.mode()
   if m == "n" then return "N"
   elseif m == "i" then return "I"
   elseif m == "v" or m == "V" or m == "\22" then return "V"
@@ -177,15 +176,15 @@ local function ShortMode()
 end
 
 local function Buffers()
-  local current_buf = vim.api.nvim_get_current_buf()
+  local current_buf = api.nvim_get_current_buf()
   local bufline = ""
-  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_loaded(bufnr) then
-      local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
+  for _, bufnr in ipairs(api.nvim_list_bufs()) do
+    if api.nvim_buf_is_loaded(bufnr) then
+      local name = fn.fnamemodify(api.nvim_buf_get_name(bufnr), ":t")
       if name == "" then name = "[No Name]" end
       if #name > 20 then name = name:sub(1,20) .. "…" end
-      local modified = vim.bo[bufnr].modified and "+" or ""
-      local readonly = vim.bo[bufnr].readonly and "RO" or ""
+      local modified = bo[bufnr].modified and "+" or ""
+      local readonly = bo[bufnr].readonly and "RO" or ""
       local label = bufnr .. ":" .. name .. modified .. readonly
       if bufnr == current_buf then
         bufline = bufline .. " [" .. label .. "] "
@@ -204,40 +203,40 @@ function MyStatusline()
   local pos = "%y %p%% %l:%c"
   local right
   if mode == ":" then
-    right = ":" .. (vim.g.cmdline_status or "")
+    right = ":" .. (g.cmdline_status or "")
   else
     right = "[" .. mode .. "] " .. pos
   end
   return bufline .. "%=" .. filename .. " " .. right
 end
 
-vim.o.laststatus = 2
-vim.o.cmdheight = 0
-vim.g.cmdline_status = ""
+o.laststatus = 2
+o.cmdheight = 0
+g.cmdline_status = ""
 
-vim.api.nvim_create_autocmd({"CmdlineEnter","CmdlineLeave","CmdlineChanged"},{
+api.nvim_create_autocmd({"CmdlineEnter","CmdlineLeave","CmdlineChanged"},{
   callback = function()
-    vim.g.cmdline_status = vim.fn.getcmdline()
+    g.cmdline_status = fn.getcmdline()
   end
 })
 
 -- file manager
+
 _G.DirWin = nil
 _G.DirBuf = nil
 
-
 local function ListDirDepth(dir, depth)
   local files = {}
-  local items = vim.fn.readdir(dir)
+  local items = fn.readdir(dir)
   for _, f in ipairs(items) do
     if string.sub(f,1,1) ~= '.' then
       local fullpath = dir .. '/' .. f
       local icon = ''
-      if vim.fn.isdirectory(fullpath) == 1 then
+      if fn.isdirectory(fullpath) == 1 then
         icon = '📁'
       end
       table.insert(files, icon .. ' ' .. f)
-      if vim.fn.isdirectory(fullpath) == 1 and depth > 1 then
+      if fn.isdirectory(fullpath) == 1 and depth > 1 then
         local subfiles = ListDirDepth(fullpath, depth - 1)
         for _, sf in ipairs(subfiles) do
           table.insert(files, '  ' .. sf)
@@ -249,7 +248,7 @@ local function ListDirDepth(dir, depth)
 end
 
 function ShowDir()
-  local dir = vim.fn.expand('%:p:h')
+  local dir = fn.expand('%:p:h')
   local files = ListDirDepth(dir, 2)
 
   local width = 25
@@ -260,10 +259,10 @@ function ShowDir()
   local buf = _G.DirBuf
   local win = _G.DirWin
 
-  if not win or not vim.api.nvim_win_is_valid(win) then
-    buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, files)
-    win = vim.api.nvim_open_win(buf, false, {
+  if not win or not api.nvim_win_is_valid(win) then
+    buf = api.nvim_create_buf(false, true)
+    api.nvim_buf_set_lines(buf, 0, -1, false, files)
+    win = api.nvim_open_win(buf, false, {
       relative = 'editor',
       row = row,
       col = col,
@@ -272,15 +271,15 @@ function ShowDir()
       style = 'minimal',
       border = 'single'
     })
-    vim.api.nvim_win_set_option(win, 'winblend', 30)
-    vim.api.nvim_win_set_option(win, 'winhl', 'Normal:Normal,FloatBorder:Normal')
+    api.nvim_win_set_option(win, 'winblend', 30)
+    api.nvim_win_set_option(win, 'winhl', 'Normal:Normal,FloatBorder:Normal')
 
     _G.DirWin = win
     _G.DirBuf = buf
   else
-    buf = vim.api.nvim_win_get_buf(win)
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, files)
-    vim.api.nvim_win_set_config(win, {
+    buf = api.nvim_win_get_buf(win)
+    api.nvim_buf_set_lines(buf, 0, -1, false, files)
+    api.nvim_win_set_config(win, {
       relative = 'editor',
       row = row,
       col = col,
@@ -293,8 +292,8 @@ function ShowDir()
 end
 
 function ToggleDir()
-  if _G.DirWin and vim.api.nvim_win_is_valid(_G.DirWin) then
-    vim.api.nvim_win_close(_G.DirWin, true)
+  if _G.DirWin and api.nvim_win_is_valid(_G.DirWin) then
+    api.nvim_win_close(_G.DirWin, true)
     _G.DirWin = nil
     _G.DirBuf = nil
   else
@@ -302,15 +301,15 @@ function ToggleDir()
   end
 end
 
-vim.api.nvim_create_autocmd("VimResized", {
+api.nvim_create_autocmd("VimResized", {
   callback = function()
-    if _G.DirWin and vim.api.nvim_win_is_valid(_G.DirWin) then
+    if _G.DirWin and api.nvim_win_is_valid(_G.DirWin) then
       local width = 25
-      local height = vim.api.nvim_win_get_height(_G.DirWin)
-      vim.api.nvim_win_set_config(_G.DirWin, {
+      local height = api.nvim_win_get_height(_G.DirWin)
+      api.nvim_win_set_config(_G.DirWin, {
         relative = 'editor',
         row = 1,
-        col = vim.o.columns - width - 1,
+        col = o.columns - width - 1,
         width = width,
         height = height,
         style = 'minimal',
@@ -320,13 +319,12 @@ vim.api.nvim_create_autocmd("VimResized", {
   end
 })
 
-vim.api.nvim_create_autocmd({"BufEnter", "DirChanged"}, {
+api.nvim_create_autocmd({"BufEnter", "DirChanged"}, {
   callback = function()
-    if _G.DirWin and vim.api.nvim_win_is_valid(_G.DirWin) then
+    if _G.DirWin and api.nvim_win_is_valid(_G.DirWin) then
       ShowDir()
     end
   end
 })
 
-vim.api.nvim_set_keymap('n', '<A-e>', ':lua ToggleDir()<CR>', { noremap = true, silent = true })
-
+api.nvim_set_keymap('n', '<A-e>', ':lua ToggleDir()<CR>', { noremap = true, silent = true })
