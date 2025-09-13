@@ -6,12 +6,19 @@ local g = v.g
 local key = v.keymap.set
 local cmd = v.cmd
 local lsp = v.lsp
-local lspe = lsp.enable
 local api = v.api
 local fn = v.fn
 local bo = v.bo
 local treesitter = v.treesitter
 local diagnostic = v.diagnostic
+local pack = v.pack
+
+pack.add({
+  { src = "https://github.com/marko-cerovac/material.nvim" },
+  {src="https://github.com/folke/which-key.nvim"}
+})
+
+
 
 -- functions
 -- tree sitter tree-sitter-cli must be installed
@@ -39,31 +46,31 @@ api.nvim_create_autocmd("LspAttach", {
 
 -- lsp things
 local function on_attach(client, bufnr)
-	lsp.completion.enable(true, client.id, bufnr, {
-		autotrigger = true,
-		convert = function(item)
-			return { abbr = item.label:gsub("%b()", "") }
-		end,
-	})
+  lsp.completion.enable(true, client.id, bufnr, {
+    autotrigger = true,
+    convert = function(item)
+      return { abbr = item.label:gsub("%b()", "") }
+    end,
+  })
 
-	key("i", "<C-space>", lsp.completion.get, { desc = "trigger autocompletion" })
+  key("i", "<C-space>", lsp.completion.get, { desc = "trigger autocompletion" })
   api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "Hovers ur ass" })
 
   api.nvim_create_autocmd("InsertCharPre", {
     buffer = bufnr,
-    callback = function ()
+    callback = function()
       lsp.completion.get()
     end
   })
 end
 
-local servers = { "gopls", "basedpyright", "lua_ls" }
+local servers = { "gopls", "markdown_oxide", "emmylua_ls" }
 
 for _, server in ipairs(servers) do
-	lsp.enable(server)
-	lsp.config(server, {
-		on_attach = on_attach,
-	})
+  lsp.enable(server)
+  lsp.config(server, {
+    on_attach = on_attach,
+  })
 end
 
 -- line
@@ -71,12 +78,19 @@ o.statusline = "%!v:lua.MyStatusline()"
 
 local function ShortMode()
   local m = fn.mode()
-  if m == "n" then return "N"
-  elseif m == "i" then return "I"
-  elseif m == "v" or m == "V" or m == "\22" then return "V"
-  elseif m == "R" then return "R"
-  elseif m == "c" then return ":"
-  elseif m == "t" then return "T" end
+  if m == "n" then
+    return "N"
+  elseif m == "i" then
+    return "I"
+  elseif m == "v" or m == "V" or m == "\22" then
+    return "V"
+  elseif m == "R" then
+    return "R"
+  elseif m == "c" then
+    return ":"
+  elseif m == "t" then
+    return "T"
+  end
   return m
 end
 
@@ -87,7 +101,7 @@ local function Buffers()
     if api.nvim_buf_is_loaded(bufnr) then
       local name = fn.fnamemodify(api.nvim_buf_get_name(bufnr), ":t")
       if name == "" then name = "[No Name]" end
-      if #name > 20 then name = name:sub(1,20) .. "…" end
+      if #name > 20 then name = name:sub(1, 20) .. "…" end
       local modified = bo[bufnr].modified and "+" or ""
       local readonly = bo[bufnr].readonly and "RO" or ""
       local label = bufnr .. ":" .. name .. modified .. readonly
@@ -119,19 +133,25 @@ o.laststatus = 2
 o.cmdheight = 0
 g.cmdline_status = ""
 
-api.nvim_create_autocmd({"CmdlineEnter","CmdlineLeave","CmdlineChanged"},{
+api.nvim_create_autocmd({ "CmdlineEnter", "CmdlineLeave", "CmdlineChanged" }, {
   callback = function()
     g.cmdline_status = fn.getcmdline()
   end
 })
 
+-- help pages
+api.nvim_create_autocmd("FileType", {
+    pattern = { "help", "man" },
+    command = "wincmd L",
+})
+
 -- diag
 diagnostic.config({
-	virtual_text = true,
-	signs = true,
-	underline = true,
-	update_in_insert = false,
-	severity_sort = true,
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
 })
 
 -- settings
@@ -152,11 +172,22 @@ o.termguicolors = true
 o.showmatch = true
 o.completeopt = { "menuone", "noselect", "popup" }
 o.foldmethod = "expr"
+o.splitright = true
 
+g.netrw_liststyle = 3
+g.netrw_browse_split = 4
+g.netrw_winsize = 10
+g.netrw_banner = 0
+g.netrw_preview= 1
+
+cmd[[colorscheme material-deep-ocean]]
 cmd([[autocmd BufReadPost * silent! normal! g`"]])
 
 g.mapleader = " "
 
 -- keymaps
-
-
+key({"n","i"}, "<A-Left>", "<cmd>wincmd h<cr>")
+key({"n","i"}, "<A-Right>", "<cmd>wincmd l<cr>")
+key({"n","i"}, "<A-Up>", "<cmd>wincmd k<cr>")
+key({"n","i"}, "<A-Down>", "<cmd>wincmd j<cr>")
+key("n", "<A-e>", "<cmd>Lexplore <cr>")
