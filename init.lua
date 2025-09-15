@@ -6,6 +6,7 @@ lspc = lsp.config
 lspe = lsp.enable
 
 --settings
+v.loader.enable()
 o.relativenumber = true
 o.tabstop = 4
 o.softtabstop = 4
