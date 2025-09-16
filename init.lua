@@ -38,6 +38,7 @@ vim.opt.statusline = "%f %m%=%{&filetype}%=%l:%c [%p%%]"
 --colorizer
 require("colorizer").setup()
 
+-- markdown read
 vim.api.nvim_create_autocmd("BufReadPre", {
 	pattern = "*.md",
 	callback = function()

@@ -8,3 +8,5 @@
 - <C-space> get completion menu(auto triggers already on some buttons like .)
 - <leader>ca  code actions
 - <leader>f formats code
+
+> **_FYI:_** neovim has default shortcut shift k try it out
