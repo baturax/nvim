@@ -51,16 +51,28 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client:supports_method("textDocument/completion") then
+		if client and client.supports_method and client:supports_method("textDocument/completion") then
 			vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
 			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-			keyset("i", "<C-Space>", function()
-				vim.lsp.completion.get()
-			end)
-			keyset("n", "<leader>ca", lsp.buf.code_action, { noremap = true, silent = true })
 		end
+
+		-- keymaps
+		-- -- get completions
+		keyset("i", "<C-Space>", function()
+			vim.lsp.completion.get()
+		end)
+		-- code actions
+		keyset("n", "<leader>ca", function()
+			lsp.buf.code_action()
+		end)
+
+		-- format code
+		keyset("n", "<leader>f", function()
+			lsp.buf.format()
+		end)
 	end,
 })
+
 
 --diagnostic
 diag.config({
@@ -113,8 +125,8 @@ lspc("lua_ls", {
 		if client.workspace_folders then
 			local path = client.workspace_folders[1].name
 			if
-				path ~= fn.stdpath("config")
-				and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+					path ~= fn.stdpath("config")
+					and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
 			then
 				return
 			end
