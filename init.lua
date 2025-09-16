@@ -15,7 +15,6 @@ local gh = "https://github.com/"
 
 add({
 	gh .. "catgoose/nvim-colorizer.lua",
-	{ src = gh .. "folke/tokyonight.nvim" },
 	{ src = gh .. "nvim-treesitter/nvim-treesitter", version = "main" },
 })
 
@@ -97,7 +96,7 @@ vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 g.mapleader = " "
 
 cmd([[ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q") ]])
-cmd([[ colorscheme tokyonight-night ]])
+--cmd([[ colorscheme tokyonight-night ]])
 
 -- Lsp Configs
 -- lua
