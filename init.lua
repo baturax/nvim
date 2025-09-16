@@ -12,7 +12,8 @@ gh = "https://github.com/"
 vim.pack.add({
 	gh .. "catgoose/nvim-colorizer.lua",
 	gh .. "MeanderingProgrammer/render-markdown.nvim",
-	{ src = gh .. "folke/tokyonight.nvim", }
+	{ src = gh .. "folke/tokyonight.nvim", },
+	{ src = gh .. "nvim-treesitter/nvim-treesitter", version = "main" }
 })
 
 --setup plugins
