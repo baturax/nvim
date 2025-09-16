@@ -32,6 +32,9 @@ require("nvim-treesitter").install({
 	"diff",
 })
 
+--status line
+vim.opt.statusline = "%f %m%=%{&filetype}%=%l:%c [%p%%]"
+
 --colorizer
 require("colorizer").setup()
 
@@ -97,6 +100,11 @@ g.mapleader = " "
 
 cmd([[ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q") ]])
 --cmd([[ colorscheme tokyonight-night ]])
+
+vim.cmd [[
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+]]
+
 
 -- Lsp Configs
 -- lua
