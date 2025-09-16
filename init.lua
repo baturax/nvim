@@ -6,6 +6,7 @@ lspc = lsp.config
 lspe = lsp.enable
 cmd = v.cmd
 add = v.pack.add
+wo = v.wo
 
 gh = "https://github.com/"
 
@@ -16,7 +17,9 @@ vim.pack.add({
 	{ src = gh .. "nvim-treesitter/nvim-treesitter", version = "main" }
 })
 
---setup plugins
+--tree sitter
+require('nvim-treesitter').install({ "markdown", "vim", "vimdoc", "lua", "markdown_inline", "go", "gomod", "gosum", "bash", "diff" })
+
 --colorizer
 require("colorizer").setup()
 
@@ -40,6 +43,8 @@ o.swapfile = false
 o.numberwidth = 1
 o.clipboard = "unnamedplus"
 o.list = true
+wo.foldexpr = " v:lua.vim.treesitter.foldexpr()"
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
 cmd([[ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q") ]])
 cmd [[ colorscheme tokyonight-night ]]
