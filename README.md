@@ -9,4 +9,4 @@
 - <leader>ca  code actions
 - <leader>f formats code
 
-> **_FYI:_** neovim has default shortcut shift k try it out
+> **_FYI_** neovim has default shortcut shift k try it out
