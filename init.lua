@@ -4,6 +4,7 @@ o = v.o
 lsp = v.lsp
 lspc = lsp.config
 lspe = lsp.enable
+cmd = v.cmd
 
 --settings
 v.loader.enable()
@@ -23,6 +24,8 @@ o.undofile = true
 o.mousemodel = "extend"
 o.swapfile = false
 o.numberwidth = 1
+
+cmd [[ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q") ]]
 
 -- Lsp Configs
 -- lua
