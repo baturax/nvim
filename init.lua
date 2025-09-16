@@ -9,11 +9,11 @@ cmd = v.cmd
 --settings
 v.loader.enable()
 o.relativenumber = true
-o.tabstop = 4
-o.softtabstop = 4
-o.shiftwidth = 4
+o.tabstop = 2
+o.softtabstop = 2
+o.shiftwidth = 2
 opt.fillchars:append(",eob: ")
-opt.listchars = { tab = "-->", multispace = " ", trail = "", extends = "⟩", precedes = "⟨" }
+opt.listchars = { tab = " ", multispace = " ", trail = "", extends = "⟩", precedes = "⟨" }
 o.wrap = true
 o.termguicolors = true
 o.scrolloff = 10
@@ -24,6 +24,8 @@ o.undofile = true
 o.mousemodel = "extend"
 o.swapfile = false
 o.numberwidth = 1
+o.clipboard = "unnamedplus"
+o.list = true
 
 cmd [[ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q") ]]
 
