@@ -5,6 +5,17 @@ lsp = v.lsp
 lspc = lsp.config
 lspe = lsp.enable
 cmd = v.cmd
+add = v.pack.add
+
+gh = "https://github.com/"
+
+vim.pack.add({
+	gh .. "catgoose/nvim-colorizer.lua"
+})
+
+--setup plugins
+--colorizer
+require("colorizer").setup()
 
 --settings
 v.loader.enable()
