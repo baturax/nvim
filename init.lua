@@ -12,6 +12,7 @@ gh = "https://github.com/"
 vim.pack.add({
 	gh .. "catgoose/nvim-colorizer.lua",
 	gh .. "MeanderingProgrammer/render-markdown.nvim",
+	{ src = gh .. "mountain-theme/vim", name = "mountain" }
 })
 
 --setup plugins
@@ -40,6 +41,7 @@ o.clipboard = "unnamedplus"
 o.list = true
 
 cmd([[ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q") ]])
+cmd [[ colorscheme mountain ]]
 
 -- Lsp Configs
 -- lua
