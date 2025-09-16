@@ -25,13 +25,16 @@ require("colorizer").setup()
 
 --settings
 v.loader.enable()
+o.number = true
 o.relativenumber = true
+o.signcolumn = "yes"
 o.tabstop = 2
 o.softtabstop = 2
 o.shiftwidth = 2
 opt.fillchars:append(",eob: ")
 opt.listchars = { tab = " ", multispace = " ", trail = "", extends = "⟩", precedes = "⟨" }
 o.wrap = true
+o.breakindent = true
 o.termguicolors = true
 o.scrolloff = 10
 o.inccommand = "split"
@@ -43,6 +46,9 @@ o.swapfile = false
 o.numberwidth = 1
 o.clipboard = "unnamedplus"
 o.list = true
+o.splitright = true
+o.splitbelow = true
+o.winborder = "rounded"
 wo.foldexpr = " v:lua.vim.treesitter.foldexpr()"
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
