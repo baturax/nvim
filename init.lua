@@ -1,21 +1,20 @@
-v = vim
-opt = v.opt
-o = v.o
-lsp = v.lsp
-lspc = lsp.config
-lspe = lsp.enable
-cmd = v.cmd
-add = v.pack.add
-wo = v.wo
-fn = v.fn
-keyset = v.keymap.set
-diag = v.diagnostic
-
-gh = "https://github.com/"
+local v = vim
+local opt = v.opt
+local o = v.o
+local lsp = v.lsp
+local lspc = lsp.config
+local lspe = lsp.enable
+local cmd = v.cmd
+local add = v.pack.add
+local wo = v.wo
+local fn = v.fn
+local keyset = v.keymap.set
+local diag = v.diagnostic
+local g = v.g
+local gh = "https://github.com/"
 
 add({
 	gh .. "catgoose/nvim-colorizer.lua",
-	gh .. "MeanderingProgrammer/render-markdown.nvim",
 	{ src = gh .. "folke/tokyonight.nvim" },
 	{ src = gh .. "nvim-treesitter/nvim-treesitter", version = "main" },
 })
@@ -37,6 +36,15 @@ require("nvim-treesitter").install({
 --colorizer
 require("colorizer").setup()
 
+vim.api.nvim_create_autocmd("BufReadPre", {
+	pattern = "*.md",
+	callback = function()
+		add({
+			"https://github.com/MeanderingProgrammer/render-markdown.nvim",
+		}, { load = true })
+	end,
+})
+
 --lsp
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
@@ -44,9 +52,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		if client:supports_method("textDocument/completion") then
 			vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
 			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-			vim.keymap.set("i", "<C-Space>", function()
+			keyset("i", "<C-Space>", function()
 				vim.lsp.completion.get()
 			end)
+			keyset("n", "<leader>ca", lsp.buf.code_action, { noremap = true, silent = true })
 		end
 	end,
 })
@@ -85,6 +94,7 @@ o.splitbelow = true
 o.winborder = "rounded"
 wo.foldexpr = " v:lua.vim.treesitter.foldexpr()"
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+g.mapleader = " "
 
 cmd([[ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q") ]])
 cmd([[ colorscheme tokyonight-night ]])
