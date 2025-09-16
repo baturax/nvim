@@ -7,21 +7,55 @@ lspe = lsp.enable
 cmd = v.cmd
 add = v.pack.add
 wo = v.wo
+fn = v.fn
+keyset = v.keymap.set
+diag = v.diagnostic
 
 gh = "https://github.com/"
 
-vim.pack.add({
+add({
 	gh .. "catgoose/nvim-colorizer.lua",
 	gh .. "MeanderingProgrammer/render-markdown.nvim",
-	{ src = gh .. "folke/tokyonight.nvim", },
-	{ src = gh .. "nvim-treesitter/nvim-treesitter", version = "main" }
+	{ src = gh .. "folke/tokyonight.nvim" },
+	{ src = gh .. "nvim-treesitter/nvim-treesitter", version = "main" },
 })
 
 --tree sitter
-require('nvim-treesitter').install({ "markdown", "vim", "vimdoc", "lua", "markdown_inline", "go", "gomod", "gosum", "bash", "diff" })
+require("nvim-treesitter").install({
+	"markdown",
+	"vim",
+	"vimdoc",
+	"lua",
+	"markdown_inline",
+	"go",
+	"gomod",
+	"gosum",
+	"bash",
+	"diff",
+})
 
 --colorizer
 require("colorizer").setup()
+
+--lsp
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client:supports_method("textDocument/completion") then
+			vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
+			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+			vim.keymap.set("i", "<C-Space>", function()
+				vim.lsp.completion.get()
+			end)
+		end
+	end,
+})
+
+--diagnostic
+diag.config({
+	virtual_text  = true,
+	virtual_lines = true
+})
 
 --settings
 v.loader.enable()
@@ -53,7 +87,7 @@ wo.foldexpr = " v:lua.vim.treesitter.foldexpr()"
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
 cmd([[ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q") ]])
-cmd [[ colorscheme tokyonight-night ]]
+cmd([[ colorscheme tokyonight-night ]])
 
 -- Lsp Configs
 -- lua
@@ -62,7 +96,7 @@ lspc("lua_ls", {
 		if client.workspace_folders then
 			local path = client.workspace_folders[1].name
 			if
-				path ~= vim.fn.stdpath("config")
+				path ~= fn.stdpath("config")
 				and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
 			then
 				return
