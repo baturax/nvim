@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 		add({
 			"https://github.com/MeanderingProgrammer/render-markdown.nvim",
 		}, { load = true })
-	end,
+	end
 })
 
 --lsp
@@ -102,6 +102,11 @@ o.splitright = true
 o.splitbelow = true
 o.winborder = "rounded"
 o.showmatch = true
+o.foldenable = true
+o.foldlevel = 99
+o.foldmethod = "expr"
+o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
 wo.foldexpr = " v:lua.vim.treesitter.foldexpr()"
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 g.mapleader = " "
