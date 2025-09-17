@@ -13,15 +13,15 @@
 ### Tree Sitter setup without plugin:
 
 ```
-luarocks --lua-version=5.1 --tree=$HOME/.local/share/nvim/rocks install tree-sitter-blabla
+luarocks --lua-version=5.1 --tree=$HOME/.local/share/nvim/rocks install tree-sitter-foo
 ```
 
 ```
 mkdir -p $HOME/.local/share/nvim/site/pack/treesitter/start
 
 ln -sf \
-  $HOME/.local/share/nvim/rocks/lib/luarocks/rocks-5.1/tree-sitter-blabla/version \
-  $HOME/.local/share/nvim/site/pack/treesitter/start/tree-sitter-rust
+  $HOME/.local/share/nvim/rocks/lib/luarocks/rocks-5.1/tree-sitter-foo/fooversion \
+  $HOME/.local/share/nvim/site/pack/treesitter/start/tree-sitter-foo
 ```
 
 Current startup time: 021.397
