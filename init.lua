@@ -15,25 +15,10 @@ local gh = "https://github.com/"
 
 add({
 	gh .. "catgoose/nvim-colorizer.lua",
-	{ src = gh .. "nvim-treesitter/nvim-treesitter", version = "main" },
 })
 
 -- custom commands
 vim.api.nvim_create_user_command("Q", function() cmd("qa!") end, {})
-
---tree sitter
-require("nvim-treesitter").install({
-	"markdown",
-	"vim",
-	"vimdoc",
-	"lua",
-	"markdown_inline",
-	"go",
-	"gomod",
-	"gosum",
-	"bash",
-	"diff",
-})
 
 --status line
 vim.opt.statusline = "%f %m%=%{&filetype}%=%l:%c [%p%%]"
@@ -76,7 +61,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end)
 	end,
 })
-
 
 --diagnostic
 diag.config({
