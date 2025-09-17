@@ -18,6 +18,9 @@ add({
 	{ src = gh .. "nvim-treesitter/nvim-treesitter", version = "main" },
 })
 
+-- custom commands
+vim.api.nvim_create_user_command("Q", function() cmd("qa!")end, {})
+
 --tree sitter
 require("nvim-treesitter").install({
 	"markdown",
