@@ -90,7 +90,7 @@ o.tabstop = 2
 o.softtabstop = 2
 o.shiftwidth = 2
 opt.fillchars:append(",eob: ")
-opt.listchars = { tab = " ", multispace = " ", trail = "", extends = "⟩", precedes = "⟨" }
+opt.listchars = { tab = " ", multispace = " ", trail = "", extends = "⟩", precedes = "⟨" }
 o.wrap = true
 o.breakindent = true
 o.termguicolors = true
@@ -107,12 +107,13 @@ o.list = true
 o.splitright = true
 o.splitbelow = true
 o.winborder = "rounded"
+o.showmatch = true
 wo.foldexpr = " v:lua.vim.treesitter.foldexpr()"
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 g.mapleader = " "
 
 cmd([[ autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q") ]])
---cmd([[ colorscheme tokyonight-night ]])
+cmd([[ colorscheme koehler ]])
 
 vim.cmd [[
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
