@@ -17,6 +17,13 @@ add({
 	gh .. "catgoose/nvim-colorizer.lua",
 })
 
+-- tree-sitter
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function()
+        pcall(vim.treesitter.start)
+    end
+})
+
 -- custom commands
 vim.api.nvim_create_user_command("Q", function() cmd("qa!") end, {})
 
