@@ -226,12 +226,12 @@ end
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go",
 	callback = function()
-local base_params = vim.lsp.util.make_range_params(nil, "utf-8")
-local params = {
-  textDocument = base_params.textDocument,
-  range = base_params.range,
-  context = { only = { "source.organizeImports" } }
-}
+		local base_params = vim.lsp.util.make_range_params(nil, "utf-8")
+		local params = {
+			textDocument = base_params.textDocument,
+			range = base_params.range,
+			context = { only = { "source.organizeImports" } }
+		}
 		params.context = { only = { "source.organizeImports" } }
 		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
 		for cid, res in pairs(result or {}) do
