@@ -240,6 +240,32 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 
 -- lua
+lspc("lua_ls", {
+	on_init = function(client)
+
+		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+			runtime = {
+				version = "LuaJIT",
+				path = {
+					"lua/?.lua",
+					"lua/?/init.lua",
+				},
+			},
+			workspace = {
+				checkThirdParty = false,
+				library = {
+					vim.env.VIMRUNTIME,
+				},
+			},
+		})
+	end,
+	settings = {
+		Lua = {},
+	},
+})
 lspe("lua_ls")
+
+--
+--
 lspe("gopls")
 lspe("pyright")
