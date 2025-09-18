@@ -27,11 +27,21 @@ vim.api.nvim_create_autocmd("FileType", {
 -- custom commands
 vim.api.nvim_create_user_command("Q", function() cmd("qa!") end, {})
 
+-- enable Coloring
+vim.api.nvim_create_user_command("Colorize", function()
+	require("colorizer").setup()
+	require("colorizer").attach_to_buffer(0, { mode = "background", css = true })
+end, {})
+
+-- blue
+-- #212121
+-- #000
+-- #fff
+
 --status line
 vim.opt.statusline = "%f %m%=%{&filetype}%=%l:%c [%p%%]"
 
 --colorizer
-require("colorizer").setup()
 
 -- markdown read
 vim.api.nvim_create_autocmd("BufReadPre", {
