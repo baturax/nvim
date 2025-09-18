@@ -28,24 +28,18 @@ end, {})
 vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function()
 		local uv = vim.loop
-
 		local function is_git_repo(path)
 			local git_dir = path .. '/.git'
-
 			if uv.fs_stat(git_dir) then
 				return true
 			end
-
 			local parent = uv.fs_realpath(path .. '/..')
 			if parent == nil or parent == path then
 				return false
 			end
-
 			return is_git_repo(parent)
 		end
-
 		local filepath = vim.fn.expand('%:p:h')
-
 		if is_git_repo(filepath) then
 			add({ gh .. "lewis6991/gitsigns.nvim" }, { load = true })
 		end
@@ -90,7 +84,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 							vim.defer_fn(function()
 								vim.lsp.completion.get()
 							end, 20)
-
 							break
 						end
 					end
@@ -107,7 +100,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		keyset("n", "<leader>ca", function()
 			lsp.buf.code_action()
 		end)
-
 		-- format code
 		keyset("n", "<leader>f", function()
 			lsp.buf.format()
@@ -248,57 +240,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 
 -- lua
-lspc("lua_ls", {
-	on_init = function(client)
-		if client.workspace_folders then
-			local path = client.workspace_folders[1].name
-			if
-					path ~= fn.stdpath("config")
-					and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
-			then
-				return
-			end
-		end
-
-		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most
-				-- likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-				-- Tell the language server how to find Lua modules same way as Neovim
-				-- (see `:h lua-module-load`)
-				path = {
-					"lua/?.lua",
-					"lua/?/init.lua",
-				},
-			},
-			-- Make the server aware of Neovim runtime files
-			workspace = {
-				checkThirdParty = false,
-				library = {
-					vim.env.VIMRUNTIME,
-					-- Depending on the usage, you might want to add additional paths
-					-- here.
-					-- '${3rd}/luv/library'
-					-- '${3rd}/busted/library'
-				},
-				-- Or pull in all of 'runtimepath'.
-				-- NOTE: this is a lot slower and will cause issues when working on
-				-- your own configuration.
-				-- See https://github.com/neovim/nvim-lspconfig/issues/3189
-				-- library = {
-				--   vim.api.nvim_get_runtime_file('', true),
-				-- }
-			},
-		})
-	end,
-	settings = {
-		Lua = {},
-	},
-})
 lspe("lua_ls")
-
---
---
 lspe("gopls")
 lspe("pyright")
