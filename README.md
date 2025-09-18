@@ -28,5 +28,3 @@ ln -sf \
   $HOME/.local/share/nvim/rocks/lib/luarocks/rocks-5.1/tree-sitter-foo/fooversion \
   $HOME/.local/share/nvim/site/pack/treesitter/start/tree-sitter-foo
 ```
-
-Current startup time: 020.787
