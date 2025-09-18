@@ -2,6 +2,7 @@
 
 - [nvim-colorizer](https://github.com/catgoose/nvim-colorizer.lua)
 - [render-markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim)
+- [yazi](https://github.com/mikavilpas/yazi.nvim)
 
 ## Some Shortcuts
 - <C-space> get completion menu(auto triggers already on some like .)
@@ -24,4 +25,4 @@ ln -sf \
   $HOME/.local/share/nvim/site/pack/treesitter/start/tree-sitter-foo
 ```
 
-Current startup time: 020.375
+Current startup time: 020.787
