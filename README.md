@@ -1,6 +1,6 @@
 ## Plugins:
 
-_None of these are automatically loaded_
+_None of these are automatically loaded so shouldn't affect startup time that much_
 
 - [nvim-colorizer](https://github.com/catgoose/nvim-colorizer.lua)
 - [render-markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim)
@@ -11,6 +11,7 @@ _None of these are automatically loaded_
 - Ctrl-Space get completion menu(auto triggers already on some like .)
 - leader-ca  code actions
 - leader-f formats code
+- Alt-e yazi
 
 > **_FYI_** neovim has default shortcut shift k try it out
 
