@@ -41,8 +41,6 @@ end, {})
 --status line
 vim.opt.statusline = "%f %m%=%{&filetype}%=%l:%c [%p%%]"
 
---colorizer
-
 -- markdown read
 vim.api.nvim_create_autocmd("BufReadPre", {
 	pattern = "*.md",
@@ -128,6 +126,14 @@ vim.cmd [[
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 ]]
 
+-- keymaps
+keyset({"n","i"}, "<A-e>", function()
+	add({
+		gh .. "nvim-lua/plenary.nvim",
+		gh .. "mikavilpas/yazi.nvim"
+	}, { load = true })
+	require("yazi").yazi()
+end)
 
 -- Lsp Configs
 -- lua
