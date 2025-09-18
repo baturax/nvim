@@ -24,4 +24,4 @@ ln -sf \
   $HOME/.local/share/nvim/site/pack/treesitter/start/tree-sitter-foo
 ```
 
-Current startup time: 021.397
+Current startup time: 020.375
