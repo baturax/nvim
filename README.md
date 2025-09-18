@@ -8,9 +8,9 @@ _None of these are automatically loaded_
 - [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 
 ## Some Shortcuts
-- <C-space> get completion menu(auto triggers already on some like .)
-- <leader>ca  code actions
-- <leader>f formats code
+- Ctrl-Space get completion menu(auto triggers already on some like .)
+- leader-ca  code actions
+- leader-f formats code
 
 > **_FYI_** neovim has default shortcut shift k try it out
 
