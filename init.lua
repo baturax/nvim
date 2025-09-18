@@ -26,15 +26,32 @@ end, {})
 
 -- git signs
 vim.api.nvim_create_autocmd("BufReadPost", {
-	callback = function()
-		local filepath = vim.fn.expand('%:p:h')
-		local git_dir = filepath .. '/.git'
+  callback = function()
+    local uv = vim.loop
 
-		if vim.fn.isdirectory(git_dir) == 1 then
-			add({ gh .. "lewis6991/gitsigns.nvim" }, { load = true })
-		end
-	end
+    local function is_git_repo(path)
+      local git_dir = path .. '/.git'
+
+      if uv.fs_stat(git_dir) then
+        return true
+      end
+
+      local parent = uv.fs_realpath(path .. '/..')
+      if parent == nil or parent == path then
+        return false
+      end
+
+      return is_git_repo(parent)
+    end
+
+    local filepath = vim.fn.expand('%:p:h')
+
+    if is_git_repo(filepath) then
+      add({ gh .. "lewis6991/gitsigns.nvim" }, { load = true })
+    end
+  end,
 })
+
 
 --status line
 vim.opt.statusline = "%f %m%=%{&filetype}%=%l:%c [%p%%]"
