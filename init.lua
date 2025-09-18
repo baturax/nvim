@@ -144,6 +144,7 @@ vim.cmd [[
 ]]
 
 -- keymaps
+-- -- yazi
 keyset({ "n", "i" }, "<A-e>", function()
 	add({
 		gh .. "nvim-lua/plenary.nvim",
