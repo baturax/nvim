@@ -1,8 +1,11 @@
 ## Plugins:
 
+_None of these are automatically loaded_
+
 - [nvim-colorizer](https://github.com/catgoose/nvim-colorizer.lua)
 - [render-markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim)
 - [yazi](https://github.com/mikavilpas/yazi.nvim)
+- [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 
 ## Some Shortcuts
 - <C-space> get completion menu(auto triggers already on some like .)

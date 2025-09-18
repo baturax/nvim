@@ -15,9 +15,6 @@ local gh = "https://github.com/"
 
 -- custom commands
 vim.api.nvim_create_user_command("Q", function() cmd("qa!") end, {})
-
-
-
 -- enable Coloring
 vim.api.nvim_create_user_command("Colorize", function()
 	add({
@@ -26,6 +23,18 @@ vim.api.nvim_create_user_command("Colorize", function()
 	require("colorizer").setup()
 	require("colorizer").attach_to_buffer(0, { mode = "background", css = true })
 end, {})
+
+-- git signs
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = function()
+		local filepath = vim.fn.expand('%:p:h')
+		local git_dir = filepath .. '/.git'
+
+		if vim.fn.isdirectory(git_dir) == 1 then
+			add({ gh .. "lewis6991/gitsigns.nvim" }, { load = true })
+		end
+	end
+})
 
 --status line
 vim.opt.statusline = "%f %m%=%{&filetype}%=%l:%c [%p%%]"
