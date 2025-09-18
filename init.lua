@@ -13,30 +13,19 @@ local diag = v.diagnostic
 local g = v.g
 local gh = "https://github.com/"
 
-add({
-	gh .. "catgoose/nvim-colorizer.lua",
-})
-
--- tree-sitter
-vim.api.nvim_create_autocmd("FileType", {
-    callback = function()
-        pcall(vim.treesitter.start)
-    end
-})
-
 -- custom commands
 vim.api.nvim_create_user_command("Q", function() cmd("qa!") end, {})
 
+
+
 -- enable Coloring
 vim.api.nvim_create_user_command("Colorize", function()
+	add({
+		gh .. "catgoose/nvim-colorizer.lua",
+	})
 	require("colorizer").setup()
 	require("colorizer").attach_to_buffer(0, { mode = "background", css = true })
 end, {})
-
--- blue
--- #212121
--- #000
--- #fff
 
 --status line
 vim.opt.statusline = "%f %m%=%{&filetype}%=%l:%c [%p%%]"
@@ -48,6 +37,13 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 		add({
 			"https://github.com/MeanderingProgrammer/render-markdown.nvim",
 		}, { load = true })
+	end
+})
+
+-- tree-sitter
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function()
+		pcall(vim.treesitter.start)
 	end
 })
 
@@ -127,7 +123,7 @@ vim.cmd [[
 ]]
 
 -- keymaps
-keyset({"n","i"}, "<A-e>", function()
+keyset({ "n", "i" }, "<A-e>", function()
 	add({
 		gh .. "nvim-lua/plenary.nvim",
 		gh .. "mikavilpas/yazi.nvim"
