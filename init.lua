@@ -133,6 +133,7 @@ o.foldlevel = 99
 o.foldmethod = "expr"
 o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 o.cmdheight = 0
+o.laststatus = 0
 
 wo.foldexpr = " v:lua.vim.treesitter.foldexpr()"
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
