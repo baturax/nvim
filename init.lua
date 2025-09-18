@@ -73,9 +73,29 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		local bufnr = ev.buf
+
 		if client and client.supports_method and client:supports_method("textDocument/completion") then
 			vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
-			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+			vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+
+			vim.api.nvim_create_autocmd("InsertCharPre", {
+				buffer = bufnr,
+				callback = function(args)
+					local clients = vim.lsp.get_clients({ bufnr = args.buf })
+					for _, clien in ipairs(clients) do
+						if type(clien) == "table"
+								and type(clien.supports_method) == "function"
+								and clien:supports_method("textDocument/completion") then
+							vim.defer_fn(function()
+								vim.lsp.completion.get()
+							end, 20)
+
+							break
+						end
+					end
+				end,
+			})
 		end
 
 		-- keymaps
@@ -159,45 +179,45 @@ end)
 vim.o.winbar = "%{%v:lua.MyWinbar()%}"
 
 function _G.MyWinbar()
-  local mode = vim.fn.mode()
-  local current_file = vim.fn.expand("%:t")
-  if current_file == "" then current_file = "[No Name]" end
+	local mode = vim.fn.mode()
+	local current_file = vim.fn.expand("%:t")
+	if current_file == "" then current_file = "[No Name]" end
 
-  local buffers = vim.api.nvim_list_bufs()
-  local filenames = {}
-  for _, buf in ipairs(buffers) do
-    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buflisted then
+	local buffers = vim.api.nvim_list_bufs()
+	local filenames = {}
+	for _, buf in ipairs(buffers) do
+		if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buflisted then
 			local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
-name = string.format("%s[%d]", name, buf)
+			name = string.format("%s[%d]", name, buf)
 
-      if name == "" then name = "[No Name]" end
-      table.insert(filenames, name)
-    end
-  end
+			if name == "" then name = "[No Name]" end
+			table.insert(filenames, name)
+		end
+	end
 
-  local separator = " | "
-  local buffer_list = table.concat(filenames, separator)
+	local separator   = " | "
+	local buffer_list = table.concat(filenames, separator)
 
-  local focused = string.format("=== %s ===", current_file)
+	local focused     = string.format("=== %s ===", current_file)
 
-  local modified = vim.bo.modified and "[+]" or ""
-  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-  local filetype = vim.bo.filetype ~= "" and vim.bo.filetype or "noft"
-  local right = string.format("%s  %d:%d  ft:%s", modified, row, col, filetype)
+	local modified    = vim.bo.modified and "[+]" or ""
+	local row, col    = unpack(vim.api.nvim_win_get_cursor(0))
+	local filetype    = vim.bo.filetype ~= "" and vim.bo.filetype or "noft"
+	local right       = string.format("%s  %d:%d  ft:%s", modified, row, col, filetype)
 
-  local mode_hl = "%#WinBarMode#"
-  local file_hl = "%#WinBarFile#"
-  local mid_hl  = "%#WinBarFocused#"
-  local right_hl = "%#WinBarPos#"
-  local none = "%#NONE#"
+	local mode_hl     = "%#WinBarMode#"
+	local file_hl     = "%#WinBarFile#"
+	local mid_hl      = "%#WinBarFocused#"
+	local right_hl    = "%#WinBarPos#"
+	local none        = "%#NONE#"
 
-  return string.format(
-    "%s[%s]%s  %s%s%s %%=%s%s%s %%=%s%s%s",
-    mode_hl, mode, none,
-    file_hl, buffer_list, none,
-    mid_hl, focused, none,
-    right_hl, right, none
-  )
+	return string.format(
+		"%s[%s]%s  %s%s%s %%=%s%s%s %%=%s%s%s",
+		mode_hl, mode, none,
+		file_hl, buffer_list, none,
+		mid_hl, focused, none,
+		right_hl, right, none
+	)
 end
 
 -- Lsp Configs
@@ -255,3 +275,4 @@ lspe("lua_ls")
 --
 --
 lspe("gopls")
+lspe("pyright")
