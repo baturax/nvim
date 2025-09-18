@@ -167,6 +167,37 @@ keyset({ "n", "i" }, "<A-e>", function()
 	require("yazi").yazi()
 end)
 
+-- bracket complete
+local pair_map = { ["("] = ")", ["["] = "]", ["{"] = "}", ['"'] = '"', ["'"] = "'" }
+
+for open, close in pairs(pair_map) do
+  vim.keymap.set("i", open, function()
+    return open .. close .. "<Left>"
+  end, { expr = true, noremap = true })
+end
+
+vim.keymap.set("i", "<BS>", function()
+  local col = vim.fn.col(".")
+  local line = vim.fn.getline(".")
+
+  if col > 1 and col <= #line then
+    local prev_char = line:sub(col - 1, col - 1)
+    local next_char = line:sub(col, col)
+    if pair_map[prev_char] == next_char then
+      return "<Del><BS>"
+    end
+  end
+
+  local next_char = line:sub(col, col)
+  for _, close in pairs(pair_map) do
+    if next_char == close then
+      return "<Del>"
+    end
+  end
+
+  return "<BS>"
+end, { expr = true, noremap = true })
+
 -- lualine
 vim.o.winbar = "%{%v:lua.MyWinbar()%}"
 
@@ -242,7 +273,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- lua
 lspc("lua_ls", {
 	on_init = function(client)
-
 		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
 			runtime = {
 				version = "LuaJIT",
