@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 			end
 			return is_git_repo(parent)
 		end
-		local filepath = vim.fn.expand('%:p:h')
+		local filepath = fn.expand('%:p:h')
 		if is_git_repo(filepath) then
 			add({ gh .. "lewis6991/gitsigns.nvim" }, { load = true })
 		end
@@ -66,6 +66,13 @@ vim.api.nvim_create_autocmd("FileType", {
 --lsp
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
+
+		add({
+			gh .. "altermo/ultimate-autopair.nvim"
+		})
+
+		require("ultimate-autopair").setup()
+
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		local bufnr = ev.buf
 
@@ -167,50 +174,19 @@ keyset({ "n", "i" }, "<A-e>", function()
 	require("yazi").yazi()
 end)
 
--- bracket complete
-local pair_map = { ["("] = ")", ["["] = "]", ["{"] = "}", ['"'] = '"', ["'"] = "'" }
-
-for open, close in pairs(pair_map) do
-  vim.keymap.set("i", open, function()
-    return open .. close .. "<Left>"
-  end, { expr = true, noremap = true })
-end
-
-vim.keymap.set("i", "<BS>", function()
-  local col = vim.fn.col(".")
-  local line = vim.fn.getline(".")
-
-  if col > 1 and col <= #line then
-    local prev_char = line:sub(col - 1, col - 1)
-    local next_char = line:sub(col, col)
-    if pair_map[prev_char] == next_char then
-      return "<Del><BS>"
-    end
-  end
-
-  local next_char = line:sub(col, col)
-  for _, close in pairs(pair_map) do
-    if next_char == close then
-      return "<Del>"
-    end
-  end
-
-  return "<BS>"
-end, { expr = true, noremap = true })
-
 -- lualine
 vim.o.winbar = "%{%v:lua.MyWinbar()%}"
 
 function _G.MyWinbar()
-	local mode = vim.fn.mode()
-	local current_file = vim.fn.expand("%:t")
+	local mode = fn.mode()
+	local current_file = fn.expand("%:t")
 	if current_file == "" then current_file = "[No Name]" end
 
 	local buffers = vim.api.nvim_list_bufs()
 	local filenames = {}
 	for _, buf in ipairs(buffers) do
 		if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buflisted then
-			local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
+			local name = fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
 			name = string.format("%s[%d]", name, buf)
 
 			if name == "" then name = "[No Name]" end
