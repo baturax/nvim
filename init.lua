@@ -66,20 +66,34 @@ vim.api.nvim_create_autocmd("FileType", {
 --lsp
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
-
 		add({
 			gh .. "altermo/ultimate-autopair.nvim"
 		})
-
 		require("ultimate-autopair").setup()
 
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		local bufnr = ev.buf
 
 		if client and client.supports_method and client:supports_method("textDocument/completion") then
-			vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
+			vim.opt.completeopt = { "menu", "menuone", "noinsert" }
 			vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 
+			vim.api.nvim_create_autocmd("InsertCharPre", {
+				buffer = bufnr,
+				callback = function(args)
+					local clients = vim.lsp.get_clients({ bufnr = args.buf })
+					for _, clien in ipairs(clients) do
+						if type(clien) == "table"
+								and type(clien.supports_method) == "function"
+								and clien:supports_method("textDocument/completion") then
+							vim.defer_fn(function()
+								vim.lsp.completion.get()
+							end, 20)
+							break
+						end
+					end
+				end,
+			})
 		end
 
 		-- keymaps
@@ -95,6 +109,38 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		keyset("n", "<leader>f", function()
 			lsp.buf.format()
 		end)
+
+		keyset("i", "<Tab>", function()
+			if vim.fn.pumvisible() == 1 then
+				return "<C-n>"
+			else
+				return "<Tab>"
+			end
+		end, { expr = true })
+
+		keyset("i", "<S-Tab>", function()
+			if vim.fn.pumvisible() == 1 then
+				return "<C-p>"
+			else
+				return "<S-Tab>"
+			end
+		end, { expr = true })
+
+		keyset("i", "<CR>", function()
+			if vim.fn.pumvisible() == 1 then
+				return "<C-y>"
+			else
+				return "<Cr>"
+			end
+		end, { expr = true })
+
+		keyset("i", "<Esc>", function()
+			if vim.fn.pumvisible() == 1 then
+				return "<C-e>"
+			else
+				return "<Esc>"
+			end
+		end, { expr = true })
 	end,
 })
 
