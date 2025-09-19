@@ -204,6 +204,16 @@ keyset({ "n", "i" }, "<A-e>", function()
 	require("yazi").yazi()
 end)
 
+keyset({"n", "i"}, "<A-1>", "<Cmd>b1<Cr>")
+keyset({"n", "i"}, "<A-2>", "<Cmd>b2<Cr>")
+keyset({"n", "i"}, "<A-3>", "<Cmd>b3<Cr>")
+keyset({"n", "i"}, "<A-4>", "<Cmd>b4<Cr>")
+keyset({"n", "i"}, "<A-5>", "<Cmd>b5<Cr>")
+keyset({"n", "i"}, "<A-6>", "<Cmd>b6<Cr>")
+keyset({"n", "i"}, "<A-7>", "<Cmd>b7<Cr>")
+keyset({"n", "i"}, "<A-8>", "<Cmd>b8<Cr>")
+keyset({"n", "i"}, "<A-9>", "<Cmd>b9<Cr>")
+
 -- lualine
 vim.o.winbar = "%{%v:lua.MyWinbar()%}"
 
