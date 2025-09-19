@@ -80,22 +80,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
 			vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 
-			vim.api.nvim_create_autocmd("InsertCharPre", {
-				buffer = bufnr,
-				callback = function(args)
-					local clients = vim.lsp.get_clients({ bufnr = args.buf })
-					for _, clien in ipairs(clients) do
-						if type(clien) == "table"
-								and type(clien.supports_method) == "function"
-								and clien:supports_method("textDocument/completion") then
-							vim.defer_fn(function()
-								vim.lsp.completion.get()
-							end, 20)
-							break
-						end
-					end
-				end,
-			})
 		end
 
 		-- keymaps
