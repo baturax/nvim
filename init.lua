@@ -13,6 +13,7 @@ local diag = v.diagnostic
 local g = v.g
 local gh = "https://github.com/"
 
+
 -- custom commands
 vim.api.nvim_create_user_command("Q", function() cmd("qa!") end, {})
 -- enable Coloring
@@ -204,15 +205,31 @@ keyset({ "n", "i" }, "<A-e>", function()
 	require("yazi").yazi()
 end)
 
-keyset({"n", "i"}, "<A-1>", "<Cmd>b1<Cr>")
-keyset({"n", "i"}, "<A-2>", "<Cmd>b2<Cr>")
-keyset({"n", "i"}, "<A-3>", "<Cmd>b3<Cr>")
-keyset({"n", "i"}, "<A-4>", "<Cmd>b4<Cr>")
-keyset({"n", "i"}, "<A-5>", "<Cmd>b5<Cr>")
-keyset({"n", "i"}, "<A-6>", "<Cmd>b6<Cr>")
-keyset({"n", "i"}, "<A-7>", "<Cmd>b7<Cr>")
-keyset({"n", "i"}, "<A-8>", "<Cmd>b8<Cr>")
-keyset({"n", "i"}, "<A-9>", "<Cmd>b9<Cr>")
+keyset({ "n", "i", "t" }, "<A-q>", function()
+	add({ gh .. "akinsho/toggleterm.nvim" }, { load = true })
+
+	require("toggleterm").setup {
+		size = function(term)
+    if term.direction == "horizontal" then
+      return 15
+    elseif term.direction == "vertical" then
+      return vim.o.columns * 0.4
+    end
+  end,
+		direction = "vertical",
+	}
+	require("toggleterm").toggle()
+end)
+
+keyset({ "n", "i" }, "<A-1>", "<Cmd>b1<Cr>")
+keyset({ "n", "i" }, "<A-2>", "<Cmd>b2<Cr>")
+keyset({ "n", "i" }, "<A-3>", "<Cmd>b3<Cr>")
+keyset({ "n", "i" }, "<A-4>", "<Cmd>b4<Cr>")
+keyset({ "n", "i" }, "<A-5>", "<Cmd>b5<Cr>")
+keyset({ "n", "i" }, "<A-6>", "<Cmd>b6<Cr>")
+keyset({ "n", "i" }, "<A-7>", "<Cmd>b7<Cr>")
+keyset({ "n", "i" }, "<A-8>", "<Cmd>b8<Cr>")
+keyset({ "n", "i" }, "<A-9>", "<Cmd>b9<Cr>")
 
 -- lualine
 vim.o.winbar = "%{%v:lua.MyWinbar()%}"

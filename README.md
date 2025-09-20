@@ -7,6 +7,7 @@ _None of these are automatically loaded so shouldn't affect startup time that mu
 - [yazi](https://github.com/mikavilpas/yazi.nvim)
 - [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 - [ultimate-autopair](https://github.com/altermo/ultimate-autopair.nvim)
+- [toggleterm](https://github.com/akinsho/toggleterm.nvim)
 
 ## Some Shortcuts
 - Ctrl-Space get completion menu(auto triggers already on some like .)
