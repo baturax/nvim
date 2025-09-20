@@ -210,12 +210,12 @@ keyset({ "n", "i", "t" }, "<A-q>", function()
 
 	require("toggleterm").setup {
 		size = function(term)
-    if term.direction == "horizontal" then
-      return 15
-    elseif term.direction == "vertical" then
-      return vim.o.columns * 0.4
-    end
-  end,
+			if term.direction == "horizontal" then
+				return 15
+			elseif term.direction == "vertical" then
+				return vim.o.columns * 0.4
+			end
+		end,
 		direction = "vertical",
 	}
 	require("toggleterm").toggle()
@@ -230,6 +230,11 @@ keyset({ "n", "i" }, "<A-6>", "<Cmd>b6<Cr>")
 keyset({ "n", "i" }, "<A-7>", "<Cmd>b7<Cr>")
 keyset({ "n", "i" }, "<A-8>", "<Cmd>b8<Cr>")
 keyset({ "n", "i" }, "<A-9>", "<Cmd>b9<Cr>")
+
+keyset({ "n", "i", "t" }, "<A-Right>", "<Cmd>wincmd l<Cr>")
+keyset({ "n", "i", "t" }, "<A-Left>", "<Cmd>wincmd h<Cr>")
+keyset({ "n", "i", "t" }, "<A-Up>", "<Cmd>wincmd k<Cr>")
+keyset({ "n", "i", "t" }, "<A-Down>", "<Cmd>wincmd j<Cr>")
 
 -- lualine
 vim.o.winbar = "%{%v:lua.MyWinbar()%}"
