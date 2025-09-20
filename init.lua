@@ -283,7 +283,6 @@ end
 
 -- Lsp Configs
 -- go
-
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go",
 	callback = function()
@@ -306,7 +305,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		vim.lsp.buf.format({ async = false })
 	end
 })
-
 
 -- lua
 lspc("lua_ls", {
@@ -337,3 +335,4 @@ lspe("lua_ls")
 --
 lspe("gopls")
 lspe("pyright")
+lspe("ts_ls")
