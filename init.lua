@@ -329,10 +329,12 @@ lspc("lua_ls", {
 		Lua = {},
 	},
 })
-lspe("lua_ls")
+
 
 --
 --
+lspe("lua_ls")
 lspe("gopls")
 lspe("pyright")
 lspe("ts_ls")
+lspe("bashls")
