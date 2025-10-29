@@ -1,0 +1,82 @@
+{
+  "plugins": {
+    "barbar.nvim": {
+      "rev": "fb43699",
+      "src": "https://github.com/romgrk/barbar.nvim"
+    },
+    "blink.cmp": {
+      "rev": "312097b",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "1.0.0 - 2.0.0"
+    },
+    "gitsigns.nvim": {
+      "rev": "20ad441",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "indent-blankline.nvim": {
+      "rev": "005b560",
+      "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
+    },
+    "monokai-pro.nvim": {
+      "rev": "1ac671f",
+      "src": "https://github.com/loctvl842/monokai-pro.nvim"
+    },
+    "nvim-colorizer.lua": {
+      "rev": "51cf7c9",
+      "src": "https://github.com/catgoose/nvim-colorizer.lua"
+    },
+    "nvim-notify": {
+      "rev": "8701bec",
+      "src": "https://github.com/rcarriga/nvim-notify"
+    },
+    "nvim-treesitter": {
+      "rev": "645f42e8",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
+    },
+    "nvim-web-devicons": {
+      "rev": "8dcb311",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "rainbow-delimiters.nvim": {
+      "rev": "b6b3c9e",
+      "src": "https://github.com/HiPhish/rainbow-delimiters.nvim"
+    },
+    "render-markdown.nvim": {
+      "rev": "10126ef",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+    },
+    "techbase.nvim": {
+      "rev": "0da0261",
+      "src": "https://github.com/mcauley-penney/techbase.nvim"
+    },
+    "toggleterm.nvim": {
+      "rev": "9a88eae",
+      "src": "https://github.com/akinsho/toggleterm.nvim"
+    },
+    "ultimate-autopair.nvim": {
+      "rev": "6a51446",
+      "src": "https://github.com/altermo/ultimate-autopair.nvim"
+    },
+    "vim-airline": {
+      "rev": "1595731",
+      "src": "https://github.com/vim-airline/vim-airline"
+    },
+    "vim-airline-themes": {
+      "rev": "77aab8c",
+      "src": "https://github.com/vim-airline/vim-airline-themes"
+    },
+    "vim-illuminate": {
+      "rev": "0d1e936",
+      "src": "https://github.com/RRethy/vim-illuminate"
+    },
+    "yazi.nvim": {
+      "rev": "d5eb45f",
+      "src": "https://github.com/mikavilpas/yazi.nvim"
+    }
+  }
+}
