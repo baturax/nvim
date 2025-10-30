@@ -22,6 +22,7 @@ require("blink.cmp").setup({
     implementation = "lua"
   }
 })
+vim.cmd([[colorscheme decay]])
 
 local highlight = {
   "RainbowRed",
@@ -51,8 +52,6 @@ require("ibl").setup { scope = { highlight = highlight } }
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
-require("notify").setup()
-
 require('illuminate').configure({
   providers = {
     'treesitter',
@@ -62,7 +61,7 @@ require('illuminate').configure({
 })
 
 require("nvim-treesitter").setup()
-require("nvim-treesitter").install { "go", "bash", "lua", "typescript", "rust" }
+--require("nvim-treesitter").install { "go","lua"}
 
 require("gitsigns").setup()
 
@@ -78,12 +77,8 @@ require("barbar").setup({
 })
 
 require("toggleterm").setup({
-  size = function(term)
-    if term.direction == "horizontal" then
-      return 15
-    elseif term.direction == "vertical" then
-      return vim.o.columns * 0.4
-    end
-  end,
-  direction = "vertical",
+  shell = "fish",
+  direction = "float",
+  border = "curved"
+
 })

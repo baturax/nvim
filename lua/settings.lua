@@ -6,6 +6,8 @@ vim.opt.expandtab = true
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 vim.opt.fillchars:append(",eob: ")
 vim.opt.list = true
 vim.o.wrap = true
@@ -26,8 +28,9 @@ vim.o.winborder = "rounded"
 vim.o.showmatch = true
 vim.o.foldenable = true
 vim.o.foldlevel = 99
-vim.o.foldmethod = "expr"
+vim.o.shell = "fish"
 
+vim.o.foldmethod = "expr"
 vim.o.foldenable = true
 vim.o.foldlevel = 99
 vim.o.foldmethod = "expr"
