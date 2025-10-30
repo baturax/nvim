@@ -44,12 +44,10 @@ local function is_library(fname)
   local rustup_home = os.getenv 'RUSTUP_HOME' or user_home .. '/.rustup'
   local toolchains = rustup_home .. '/toolchains'
 
-  for _, item in ipairs { toolchains, registry, git_registry } do
-    if vim.fs.relpath(item, fname) then
-      local clients = vim.lsp.get_clients { name = 'rust_analyzer' }
-      return #clients > 0 and clients[#clients].config.root_dir or nil
-    end
-  end
+  local library_dirs = { toolchains, registry, git_registry }
+  
+  local lsp_utils = require('lsp_utils')
+  return lsp_utils.reuse_root_if_library(fname, library_dirs, 'rust_analyzer')
 end
 
 ---@type vim.lsp.Config
