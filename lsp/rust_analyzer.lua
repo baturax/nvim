@@ -47,7 +47,7 @@ local function is_library(fname)
   local library_dirs = { toolchains, registry, git_registry }
   
   local lsp_utils = require('lsp_utils')
-  return lsp_utils.reuse_root_if_library(fname, library_dirs, 'rust_analyzer')
+  return lsp_utils.reuse_root_if_library(fname, library_dirs, 'rust_analyzer', true)
 end
 
 ---@type vim.lsp.Config
