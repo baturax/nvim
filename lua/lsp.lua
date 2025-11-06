@@ -4,6 +4,7 @@ vim.lsp.enable({
   "ts_ls",
   "rust_analyzer",
   "lua_ls",
+  "jsonls",
 })
 
 -- lua

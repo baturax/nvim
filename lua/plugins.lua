@@ -15,10 +15,12 @@ vim.pack.add({
   { src = gh .. "altermo/ultimate-autopair.nvim" },
   {
     src = gh .. "nvim-treesitter/nvim-treesitter",
-    version = "main"
+    version = "master"
   },
   { src = gh .. "HiPhish/rainbow-delimiters.nvim" },
   { src = gh .. "RRethy/vim-illuminate" },
   { src = gh .. "lukas-reineke/indent-blankline.nvim" },
-  { src = gh .. "decaycs/decay.nvim" }
+  { src = gh .. "decaycs/decay.nvim" },
+  { src = gh .. "windwp/nvim-ts-autotag" },
+  { src = gh .."rafamadriz/friendly-snippets" }
 })

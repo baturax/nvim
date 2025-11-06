@@ -1,28 +1,80 @@
 require("blink.cmp").setup({
+
+  keymap = {
+    preset = "super-tab",
+  },
+
   appearance = {
     nerd_font_variant = "normal"
   },
 
-  keymap = {
-    preset = "super-tab"
-  },
-
   completion = {
+    menu = {
+      auto_show = true,
+      auto_show_delay_ms = 100,
+      draw = {
+        treesitter = { "lsp" }
+      }
+    },
     documentation = {
-      auto_show = true
+      auto_show = true,
+      auto_show_delay_ms = 100
+    },
+    ghost_text = { enabled = true },
+    keyword = {
+      range = "prefix",
+    },
+    list = {
+      selection = {
+        preselect = false,
+        auto_insert = true
+      }
     }
   },
 
   sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer' },
+    providers = {
+      path = {
+        opts = {
+          get_cwd = function(_)
+            return vim.fn.getcwd()
+          end
+        }
+      },
+      buffer = {
+        opts = {
+          get_bufnrs = vim.api.nvim_list_bufs
+        }
+      }
+    },
+    default = {
+      "lsp", "path", "snippets", "buffer"
+    },
   },
 
-
   fuzzy = {
-    implementation = "lua"
-  }
+    implementation = "rust",
+  },
+
+  signature = {
+    enabled = true
+  },
+
+  cmdline = {
+    keymap = { preset = 'inherit' },
+    completion = { menu = { auto_show = true } },
+  },
+
 })
 vim.cmd([[colorscheme decay]])
+
+require('nvim-ts-autotag').setup({
+  opts = {
+    enable_close = true,
+    enable_rename = true,
+    enable_close_on_slash = true
+  }
+})
 
 local highlight = {
   "RainbowRed",
@@ -60,8 +112,14 @@ require('illuminate').configure({
   },
 })
 
-require("nvim-treesitter").setup()
---require("nvim-treesitter").install { "go","lua"}
+require("nvim-treesitter").setup({
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "javascript", "typescript", "bash", "css", "editorconfig", "fish", "gitignore", "go", "gomod", "gosum", "html", "json", "kdl", "python", "rust", "scss", "toml", "tsx", "typst", "yaml" },
+  sync_install = true,
+  auto_install = true,
+  highlight = {
+    enable = true,
+  }
+})
 
 require("gitsigns").setup()
 

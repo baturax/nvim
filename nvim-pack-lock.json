@@ -9,9 +9,25 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
+    "brainrot.nvim": {
+      "rev": "8e59773",
+      "src": "https://github.com/sahaj-b/brainrot.nvim"
+    },
+    "decay.nvim": {
+      "rev": "4570145",
+      "src": "https://github.com/decaycs/decay.nvim"
+    },
+    "friendly-snippets": {
+      "rev": "572f566",
+      "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
     "gitsigns.nvim": {
       "rev": "20ad441",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "image.nvim": {
+      "rev": "446a8a5",
+      "src": "https://github.com/3rd/image.nvim"
     },
     "indent-blankline.nvim": {
       "rev": "005b560",
@@ -32,7 +48,11 @@
     "nvim-treesitter": {
       "rev": "645f42e8",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
-      "version": "'main'"
+      "version": "'master'"
+    },
+    "nvim-ts-autotag": {
+      "rev": "c4ca798",
+      "src": "https://github.com/windwp/nvim-ts-autotag"
     },
     "nvim-web-devicons": {
       "rev": "8dcb311",
@@ -69,6 +89,10 @@
     "vim-airline-themes": {
       "rev": "77aab8c",
       "src": "https://github.com/vim-airline/vim-airline-themes"
+    },
+    "vim-floaterm": {
+      "rev": "a720490",
+      "src": "https://github.com/voldikss/vim-floaterm"
     },
     "vim-illuminate": {
       "rev": "0d1e936",
