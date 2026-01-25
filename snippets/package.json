@@ -1,0 +1,13 @@
+{
+	"name": "dsadas",
+	"contributes": {
+		"snipeets": {
+			"snippets": [
+				{
+					"language": "typescript",
+					"path": "./ts.json"
+				}
+			]
+		}
+	}
+}
