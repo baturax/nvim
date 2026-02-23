@@ -5,6 +5,8 @@ require("yazi").setup({
 
 require("ultimate-autopair").setup() -- pair
 
+require('hex').setup()
+
 require("blink.cmp").setup({
 	completion = {
 		trigger = { show_on_keyword = true },
