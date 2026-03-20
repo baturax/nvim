@@ -8,7 +8,8 @@ vim.lsp.enable({
 	"html",
 	"cssls",
 	"tailwindcss",
-	"bashls"
+	"bashls",
+	"pyright"
 })
 
 vim.lsp.config('jsonls', {

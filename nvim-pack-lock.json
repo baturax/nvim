@@ -28,6 +28,10 @@
       "rev": "97129fbe8ef9467d68804a73e63c24501f56b9aa",
       "src": "https://github.com/oskarnurm/koda.nvim"
     },
+    "lazygit.nvim": {
+      "rev": "a04ad0dbc725134edbee3a5eea29290976695357",
+      "src": "https://github.com/kdheepak/lazygit.nvim"
+    },
     "nvim-lspconfig": {
       "rev": "92ee7d42320edfbb81f3cad851314ab197fa324a",
       "src": "https://github.com/neovim/nvim-lspconfig"
@@ -43,6 +47,14 @@
     "schemastore.nvim": {
       "rev": "f35b7747d4d536fba96aa098a4144e5c85252828",
       "src": "https://github.com/b0o/schemastore.nvim"
+    },
+    "terminal.nvim": {
+      "rev": "337a981b677039522b90102c452aea8130f5f9ac",
+      "src": "https://github.com/niuiic/terminal.nvim"
+    },
+    "toggleterm.nvim": {
+      "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
+      "src": "https://github.com/akinsho/toggleterm.nvim"
     },
     "typescript-tools.nvim": {
       "rev": "c2f5910074103705661e9651aa841e0d7eea9932",

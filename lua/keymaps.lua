@@ -8,6 +8,10 @@ end)
 
 keymap({ "n", "i", "t" }, "<A-e>", "<Cmd>Yazi toggle<Cr>")
 
+keymap({"n", "i", "t"}, "<A-q>", "<Cmd>ToggleTerm<Cr>")
+
+keymap({"n", "i", "t"}, "<A-g>", "<Cmd>LazyGit<Cr>")
+
 keymap({"n","i","t"}, "<A-1>", "<Cmd>BufferGoto 1<CR>")
 keymap({"n","i","t"}, "<A-2>", "<Cmd>BufferGoto 2<CR>")
 keymap({"n","i","t"}, "<A-3>", "<Cmd>BufferGoto 3<CR>")

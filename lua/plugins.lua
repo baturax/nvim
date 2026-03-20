@@ -12,6 +12,8 @@ vim.pack.add({
 	{ src = gh .. "pocco81/auto-save.nvim" },
 	{ src = gh .. "MeanderingProgrammer/render-markdown.nvim" },
 	{ src = gh .. "RaafatTurki/hex.nvim" },
+	{ src = gh .. "akinsho/toggleterm.nvim" },
+	{ src = gh .. "kdheepak/lazygit.nvim" },
 
 	-- dependencies
 	{ src = gh .. "nvim-lua/plenary.nvim" }
