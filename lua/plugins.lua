@@ -2,7 +2,7 @@ local gh = "https://github.com/"
 
 vim.pack.add({
 	{ src = gh .. "mikavilpas/yazi.nvim" },          -- yazi
-	{ src = gh .. "altermo/ultimate-autopair.nvim" }, -- autopair
+	{ src = gh .. "altermo/ultimate-autopair.nvim", version = "v0.7-try-3" }, -- autopair
 	{ src = gh .. "projekt0n/github-nvim-theme" },   -- theme
 	{ src = gh .. "saghen/blink.cmp" },
 	{ src = gh .. "neovim/nvim-lspconfig" },

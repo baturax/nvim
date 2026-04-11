@@ -3,7 +3,7 @@ require("yazi").setup({
 	open_for_directories = true,
 })
 
-require("ultimate-autopair").setup() -- pair
+-- require("ultimate-autopair").setup() -- pair
 
 require('hex').setup()
 
